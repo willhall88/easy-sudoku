@@ -28,12 +28,12 @@ class Grid
   end
 
   def cell_row(coordinates)
-    row_index = coordinates.split[0].to_i
+    row_index = coordinates.chars.first.to_i
     rows[row_index].map {|cell| cell.value} - [0]
   end
 
   def cell_column(coordinates)
-    column_index = coordinates.split[1].to_i
+    column_index = coordinates.chars.last.to_i
     columns[column_index].map {|cell| cell.value} - [0]
   end
 
@@ -42,9 +42,24 @@ class Grid
   end
 
   def cell_solve(coordinates)
-    range = [*1..9] - cell_row(coordinates) - cell_column(coordinates) - cell_sector(coordinates) - [0]
-    grid[coordinates].value = (range.first )  if range.length == 1    
+    if grid[coordinates].value == 0
+      range = [*1..9] - cell_row(coordinates) - cell_column(coordinates) - cell_sector(coordinates) - [0]
+      puts range
+      grid[coordinates].value = (range.first )  if range.length == 1    
+    else
+      return 
+    end
   end
 
+  # def solved?
+  #   !grid.values.map {|cell| cell.value }.include?(0)
+  # end
+
+  # def solve
+  #   loop do
+  #     break if solved?
+  #     grid.keys.each {|coordinates| cell_solve(coordinates)}
+  #   end
+  # end
 
 end

@@ -69,10 +69,21 @@ describe Grid do
       expect(grid.grid["00"].value).to eq 6
     end
 
+    # it 'only runs the cell solver if the cell value is 0' do
+    #   expect(grid.cell_solve("01")).to eq("this cell is not 0")
+    #   # expect()
+    # end
 
+    # it 'is solved when no 0s remain' do
+    #   grid = Grid.new('615493872348127956279568431496832517521746389783915264952681743864379125137254698')
+    #   expect(grid.solved?).to be_true
+    # end
 
-
-
+    # it 'should iterate over every cell until there are no 0s lefts' do
+    #   expect(grid.solved?).to be_false
+    #   grid.solve
+    #   expect(grid.solved?).to be_true
+    # end
 
   end
 end
