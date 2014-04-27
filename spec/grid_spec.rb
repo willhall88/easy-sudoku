@@ -56,6 +56,10 @@ describe Grid do
       expect(grid.cell_column("00")).to eq [2, 4, 5, 9, 8]
     end
 
+    it 'should take the first unsolved cell and subtract the other values in the sector from 1..9' do
+      expect(grid.cell_sector("00")).to eq [1, 5, 2, 7]
+    end    
+
 
 
 

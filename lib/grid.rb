@@ -31,14 +31,16 @@ class Grid
 
   def cell_row(coordinates)
     row_index = coordinates.split[0].to_i
-    range = [*1..9]
     rows[row_index].map {|cell| cell.value} - [0]
   end
 
   def cell_column(coordinates)
     column_index = coordinates.split[1].to_i
-    range = [*1..9]
     columns[column_index].map {|cell| cell.value} - [0]
+  end
+
+  def cell_sector(coordinates)
+    find_sector(coordinates).map {|key| grid[key].value } - [0]
   end
 
 end
