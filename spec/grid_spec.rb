@@ -49,7 +49,17 @@ describe Grid do
     end
 
     it 'should take the first unsolved cell and subtract the other values in the row from 1..9' do
-      expect(grid.solve_cell_row("00")).to eq [4,6,7,8,9]
+      expect(grid.cell_row("00")).to eq [1, 5, 3, 2]
     end
+
+    it 'should take the first unsolved cell and subtract the other values in the column from 1..9' do
+      expect(grid.cell_column("00")).to eq [2, 4, 5, 9, 8]
+    end
+
+
+
+
+
+
   end
 end
