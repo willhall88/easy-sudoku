@@ -1,15 +1,13 @@
 require_relative 'cell'
 
 class Grid
-  attr_reader :grid
+  attr_accessor :grid
 
 
   def initialize(puzzle)
     @grid = {}
-    # puts puzzle.chars.inspect
     (0..8).each{|row_num| (0..8).each{|col_num| @grid["#{row_num}#{col_num}"] = Cell.new}}
      @grid.keys.each_with_index {|key,index| @grid[key].value = puzzle.chars[index].to_i }
-    # puts grid
   end
 
 
@@ -42,5 +40,11 @@ class Grid
   def cell_sector(coordinates)
     find_sector(coordinates).map {|key| grid[key].value } - [0]
   end
+
+  def cell_solve(coordinates)
+    range = [*1..9] - cell_row(coordinates) - cell_column(coordinates) - cell_sector(coordinates) - [0]
+    grid[coordinates].value = (range.first )  if range.length == 1    
+  end
+
 
 end

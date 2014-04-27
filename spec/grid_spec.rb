@@ -60,6 +60,15 @@ describe Grid do
       expect(grid.cell_sector("00")).to eq [1, 5, 2, 7]
     end    
 
+    it 'should take the first unsolved cell and subtract all unavailable options'do
+      expect(grid.cell_solve("00")).to eq 6
+    end
+
+    it 'if only one number is available for cell, then it should place this value into the cell' do
+      grid.cell_solve("00")
+      expect(grid.grid["00"].value).to eq 6
+    end
+
 
 
 
