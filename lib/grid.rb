@@ -10,6 +10,7 @@ class Grid
      @grid.keys.each_with_index {|key,index| @grid[key].value = puzzle.chars[index].to_i }
   end
 
+    SIZE = 81
 
   def rows
     grid.values.each_slice(9).to_a
@@ -44,22 +45,23 @@ class Grid
   def cell_solve(coordinates)
     if grid[coordinates].value == 0
       range = [*1..9] - cell_row(coordinates) - cell_column(coordinates) - cell_sector(coordinates) - [0]
-      puts range
-      grid[coordinates].value = (range.first )  if range.length == 1    
-    else
-      return 
+      grid[coordinates].value = (range.first ) if range.length == 1 
     end
   end
 
-  # def solved?
-  #   !grid.values.map {|cell| cell.value }.include?(0)
-  # end
+  def solved?
+    !grid.values.map {|cell| cell.value }.include?(0)
+  end
 
-  # def solve
-  #   loop do
-  #     break if solved?
-  #     grid.keys.each {|coordinates| cell_solve(coordinates)}
-  #   end
-  # end
+  def solve
+    outstanding_before, looping = SIZE, false
+    while !solved? && !looping
+      grid.keys.each {|coordinates| cell_solve(coordinates)}
+      outstanding = grid.values.select {|cell| cell.value != 0}.count
+      looping = outstanding_before == outstanding
+      outstanding_before = outstanding
+    end
+    raise 'not solved' if !solved? 
+  end
 
 end
