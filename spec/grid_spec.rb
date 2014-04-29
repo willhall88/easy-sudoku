@@ -79,34 +79,4 @@ describe Grid do
       expect(grid.solved?).to be_true
     end
   end
-  context 'solving a hard puzzle' do
-    let(:puzzle){'800000000003600000070090200050007000000045700000100030001000068008500010090000400'}  
-    it 'should return an error if the puzzle cannot be solved'do
-      expect{grid.solve}.to raise_error RuntimeError
-    end
-
-    it 'should be able to replicate the board' do
-      expect(grid.replicate.values.map{|cell| cell.value}).to eq grid.grid.values.map {|cell| cell.value}
-    end
-
-    it 'should locate the first cell with more than 1 option' do
-      expect(grid.blank_cell).to eq("01")
-    end
-
-    it 'should return the range of possible numbers for an unsolved cell' do
-      expect(grid.cell_solve("01")). to eq [1,2,4,6]
-    end
-
-    it 'should try to solve the first cell with more than 1 option' do
-      grid.solve(grid)
-      expect(grid.solved?).to be_true
-    end
-
-
-
-
-
-
-
-  end
 end
